@@ -5,6 +5,9 @@ export function activate(context: vscode.ExtensionContext) {
 	output.appendLine('Congratulations, your extension "smart-brackets" is now active!');
 
 	const disposable = vscode.workspace.onDidChangeTextDocument(async e => {
+		if (!vscode.workspace.getConfiguration('smartBrackets').get('enable')) {
+			return;
+		}
 		let doc = e.document;
 		let editor = vscode.window.activeTextEditor;
 
@@ -18,6 +21,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 			// get the first change
 			const change = e.contentChanges[0];
+			if (!change) {
+				return;
+			}
 			const line = change.range.start.line;
 			if (change.range.end.line !== line) {
 				return;

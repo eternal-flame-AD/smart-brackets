@@ -18,7 +18,17 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": []
+    "commands": [],
+    "configuration": {
+      "title": "Smart Brackets",
+      "properties": {
+        "smartBrackets.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/Disable Auto Formatting between brackets"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
